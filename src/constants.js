@@ -16,3 +16,15 @@ export const WEIGHTS = {
   medium: 600,
   bold: 800,
 };
+
+export const BREAKPOINTS = {
+    phoneMax: '37.5rem',
+    tabletMax: '59.375rem',
+    laptopMax: '81.25rem',
+}
+
+export const QUERIES = {
+    'phoneAndDown': `(max-width: ${BREAKPOINTS.phoneMax})`,
+    'tabletAndDown': `(max-width: ${BREAKPOINTS.tabletMax})`,
+    'laptopAndDown': `(max-width: ${BREAKPOINTS.laptopMax})`,
+}

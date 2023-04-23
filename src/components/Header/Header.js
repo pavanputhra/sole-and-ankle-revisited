@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import {QUERIES} from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import Icon from "../Icon";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -30,6 +31,13 @@ const Header = () => {
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
         <Side />
+        <MobileNav>
+            <Icon id="shopping-bag" strokeWidth={1} />
+            <Icon id="search" strokeWidth={1} />
+            <MenuButton onClick={() => setShowMobileMenu(true)}>
+                <Icon id="menu" strokeWidth={1} />
+            </MenuButton>
+        </MobileNav>
       </MainHeader>
 
       <MobileMenu
@@ -45,13 +53,40 @@ const MainHeader = styled.div`
   align-items: baseline;
   padding: 18px 32px;
   height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
+  border-bottom: 1px solid var(--color-gray-300);
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(
+          1rem,
+          5.2vw - 2.5rem,
+          3rem
+  );
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
+`;
+
+const MenuButton = styled.button`
+    background: none;
+    border: none;
+  `;
+
+const MobileNav = styled.nav`
+  display: none;
+  @media ${QUERIES.tabletAndDown} {
+    display: flex;
+    gap: 40px;
+  }
+  
+  @media ${QUERIES.phoneAndDown} {
+    gap: 28px;
+  }
 `;
 
 const Side = styled.div`
@@ -62,11 +97,11 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
+  color: var(--color-gray-900);
+  font-weight: var(--font-weight-medium);
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
